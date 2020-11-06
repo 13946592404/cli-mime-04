@@ -1,27 +1,31 @@
 <template>
-  <div id="app">
-    <user-form/>
+  <div>
+    <user-form v-model="user" />
   </div>
 </template>
 
 <script>
 import UserForm from './components/UserForm.vue';
 
+const makeUser = () => ({
+  name: '',
+  gender: '',
+  career: '',
+});
+
 export default {
   name: 'App',
+
   components: {
-    'user-form': UserForm,
+    UserForm,
+  },
+
+  data() {
+    const user = makeUser();
+
+    return {
+      user,
+    };
   },
 };
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
