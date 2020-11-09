@@ -55,13 +55,6 @@ import VueI18n from 'vue-i18n';
 export default {
   name: 'userForm',
 
-  // props: [
-  //   'value',
-  // ],
-
-  // <i18n src="../locales/en-US/ns/UserFormText.json"></i18n>
-  // <i18n src="../locales/zh-CN/ns/UserFormText.json"></i18n>
-
   data() {
     const i18n = new VueI18n({
       locale: this.$i18n.locale,
