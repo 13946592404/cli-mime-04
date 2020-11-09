@@ -68,14 +68,14 @@ export default {
     };
   },
 
+  created() {
+    this.userOnChange();
+  },
+  
   methods: {
     userOnChange() {
       this.$emit('input', this.user);
     },
-  },
-
-  created() {
-    this.userOnChange();
   },
 };
 </script>
