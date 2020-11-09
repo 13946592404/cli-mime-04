@@ -1,14 +1,18 @@
 <template>
   <div class="m-10">
-    <h2 class="text-xl mb-4">Profile</h2>
-
+    <!-- title -->
+    <h2 class="text-xl mb-4" v-text="TEXTS.profile"></h2>
     <dao-form>
-      <dao-form-item label="Username">
-        <dao-input placeholder="name" v-model="user.name" @input="userOnChange"/>
+      <!-- name -->
+      <dao-form-item :label="TEXTS.userName">
+        <dao-input
+        :placeholder="user.name"
+        v-model="user.name"
+        @input="userOnChange"/>
       </dao-form-item>
 
       <!-- gender -->
-      <dao-form-item label="Gender">
+      <dao-form-item :label="TEXTS.gender">
         <dao-radio-group>
           <dao-radio
             name="sex"
@@ -25,7 +29,7 @@
       </dao-form-item>
 
       <!-- career -->
-      <dao-form-item label="Career">
+      <dao-form-item :label="TEXTS.career">
         <dao-select v-model="user.career" @change="userOnChange">
           <dao-option
             size="sm"
@@ -39,13 +43,15 @@
     </dao-form>
 
     <div class="mt-4 flex justify-end">
-      <dao-button class="mr-2">Cancel</dao-button>
-      <dao-button color="blue">Confirm</dao-button>
+      <dao-button class="mr-2" v-text="TEXTS.buttonCancel"></dao-button>
+      <dao-button color="blue" v-text="TEXTS.buttonConfirm"></dao-button>
     </div>
   </div>
 </template>
 
 <script>
+import VueI18n from 'vue-i18n';
+
 export default {
   name: 'userForm',
 
@@ -53,15 +59,38 @@ export default {
   //   'value',
   // ],
 
+  // <i18n src="../locales/en-US/ns/UserFormText.json"></i18n>
+  // <i18n src="../locales/zh-CN/ns/UserFormText.json"></i18n>
+
   data() {
-    const GENDERS = ['Female', 'Male'];
-    const CAREERS = ['Student', 'Worker', 'Others...'];
+    const i18n = new VueI18n({
+      locale: this.$i18n.locale,
+      messages: {
+        en: require('../locales/en-US/ns/UserFormText.json'),
+        ch: require('../locales/zh-CN/ns/UserFormText.json'),
+      },
+    });
+
+    const TEXTS = {
+      profile: i18n.t('profile'),
+      userName: i18n.t('userName'),
+      gender: i18n.t('gender'),
+      career: i18n.t('career'),
+      buttonCancel: i18n.t('buttonCancel'),
+      buttonConfirm: i18n.t('buttonConfirm'),
+    };
+    const USERNAME_DEFAULT = i18n.t('userNameDefault');
+    const GENDERS = i18n.t('genderList');
+    const CAREERS = i18n.t('careerList');
+
     return {
       // constants
+      TEXTS,
       GENDERS,
       CAREERS,
+
       user: {
-        name: 'name',
+        name: USERNAME_DEFAULT,
         gender: GENDERS[0],
         career: CAREERS[0],
       },
@@ -71,7 +100,7 @@ export default {
   created() {
     this.userOnChange();
   },
-  
+
   methods: {
     userOnChange() {
       this.$emit('input', this.user);

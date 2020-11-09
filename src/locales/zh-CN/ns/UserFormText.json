@@ -1,0 +1,11 @@
+{
+  "profile": "简介",
+  "userName": "用户名",
+  "userNameDefault": "你的姓名",
+  "gender": "性别",
+  "genderList": ["女", "男"],
+  "career": "职业",
+  "careerList": ["学生", "工人", "其他..."],
+  "buttonCancel": "取消",
+  "buttonConfirm": "提交"
+}

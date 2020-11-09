@@ -1,0 +1,11 @@
+{
+  "profile": "Profile",
+  "userName": "Username",
+  "userNameDefault": "your name",
+  "gender": "Gender",
+  "genderList": ["Female", "Male"],
+  "career": "Career",
+  "careerList": ["Student", "Worker", "Others..."],
+  "buttonCancel": "Cancel",
+  "buttonConfirm": "Confirm"
+}
