@@ -16,12 +16,13 @@ Vue.use(daoStyle);
 Vue.config.productionTip = false;
 
 const getLocale = () => {
-  const languageMap = new Map([
+  const LANG_COOKIE = 'APP_LANG';
+  const LANG_MAP = new Map([
     ['en-US', 'en'],
     ['zh-CN', 'ch'],
   ]);
-  return languageMap.get(Cookie.get('APP_LANG')) // Cookie不为Map中key值则向后查找
-  || languageMap.get(navigator.language || navigator.browserLanguage); // 兼容多浏览器
+  return LANG_MAP.get(Cookie.get(LANG_COOKIE)) // Cookie值不在map的key中则返回undefined，向后查找
+  || LANG_MAP.get(navigator.language || navigator.browserLanguage); // 兼容多浏览器
 };
 
 new Vue({
