@@ -16,7 +16,7 @@
         <dao-radio-group>
           <dao-radio
             name="sex"
-            v-for="item in GENDERS"
+            v-for="item in TEXTS.genderList"
             :key="item"
             :value="item"
             :label="item"
@@ -33,7 +33,7 @@
         <dao-select v-model="user.career" @change="userOnChange">
           <dao-option
             size="sm"
-            v-for="item in CAREERS"
+            v-for="item in TEXTS.careerList"
             :key="item"
             :value="item"
             :label="item"
@@ -52,6 +52,9 @@
 <script>
 import VueI18n from 'vue-i18n';
 
+const EN = require('../locales/en-US/ns/UserFormText.json');
+const CH = require('../locales/zh-CN/ns/UserFormText.json');
+
 export default {
   name: 'userForm',
 
@@ -59,33 +62,25 @@ export default {
     const i18n = new VueI18n({
       locale: this.$i18n.locale,
       messages: {
-        en: require('../locales/en-US/ns/UserFormText.json'),
-        ch: require('../locales/zh-CN/ns/UserFormText.json'),
+        en: {
+          texts: EN,
+        },
+        ch: {
+          texts: CH,
+        },
       },
     });
 
-    const TEXTS = {
-      profile: i18n.t('profile'),
-      userName: i18n.t('userName'),
-      gender: i18n.t('gender'),
-      career: i18n.t('career'),
-      buttonCancel: i18n.t('buttonCancel'),
-      buttonConfirm: i18n.t('buttonConfirm'),
-    };
-    const USERNAME_DEFAULT = i18n.t('userNameDefault');
-    const GENDERS = i18n.t('genderList');
-    const CAREERS = i18n.t('careerList');
+    const TEXTS = i18n.t('texts');
 
     return {
       // constants
       TEXTS,
-      GENDERS,
-      CAREERS,
 
       user: {
-        name: USERNAME_DEFAULT,
-        gender: GENDERS[0],
-        career: CAREERS[0],
+        name: TEXTS.userNameDefault,
+        gender: TEXTS.genderList[0],
+        career: TEXTS.careerList[0],
       },
     };
   },
