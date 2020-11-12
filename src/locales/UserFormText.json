@@ -12,7 +12,8 @@
     "career": "Career",
     "careerList": ["Student", "Worker", "Others..."],
     "buttonCancel": "Cancel",
-    "buttonConfirm": "Confirm"
+    "buttonConfirm": "Confirm",
+    "tipsText": "Last modified time:"
   },
   "ch": {
     "profile": "简介",
@@ -27,6 +28,7 @@
     "career": "职业",
     "careerList": ["学生", "工人", "其他..."],
     "buttonCancel": "取消",
-    "buttonConfirm": "提交"
+    "buttonConfirm": "提交",
+    "tipsText": "上次修改时间:"
   }
 }

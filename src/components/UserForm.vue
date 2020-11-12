@@ -58,7 +58,10 @@
       </dao-form-item>
     </dao-form>
 
-    <h3 class="mt-4">上次更新时间：{{ changeTime }}</h3>
+    <div class="mt-4">
+      <p v-text="TEXT.tipsText"/>
+      <p v-text="changeTime"/>
+    </div>
 
     <div class="mt-4 flex justify-end">
       <dao-button class="mr-2" v-text="TEXT.buttonCancel"/>
@@ -105,8 +108,9 @@ export default {
 
   methods: {
     userOnChange() {
-      this.$emit('input', this.user); // two direction - bind
-      this.changeTime = dayjs().format('YYYY-MM-DD dddd HH:mm:ss');
+      this.$emit('input', this.user); // two direction - bind , for App.vue component
+      this.changeTime = dayjs().format('YYYY-MM-DD dddd HH:mm:ss'); // update view
+      localStorage.changeTime = this.changeTime; // set time to localStorage
     },
   },
 };
