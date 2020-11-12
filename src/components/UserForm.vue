@@ -50,28 +50,12 @@
 </template>
 
 <script>
-import VueI18n from 'vue-i18n';
-
-const EN = require('../locales/en-US/ns/UserFormText.json');
-const CH = require('../locales/zh-CN/ns/UserFormText.json');
 
 export default {
   name: 'userForm',
 
   data() {
-    const i18n = new VueI18n({
-      locale: this.$i18n.locale,
-      messages: {
-        en: {
-          texts: EN,
-        },
-        ch: {
-          texts: CH,
-        },
-      },
-    });
-
-    const TEXTS = i18n.t('texts');
+    const TEXTS = this.$i18n.t('texts');
 
     return {
       // constants
