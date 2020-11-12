@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { ValidationProvider, extend } from 'vee-validate';
+import { ValidationObserver, ValidationProvider, extend } from 'vee-validate';
 import { email } from 'vee-validate/dist/rules';
 
 import i18n from './i18n'; // use self-defined i18n.js
@@ -19,3 +19,4 @@ extend('userNameValidation', {
 
 // Register it globally
 Vue.component('ValidationProvider', ValidationProvider);
+Vue.component('ValidationObserver', ValidationObserver);

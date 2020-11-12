@@ -2,15 +2,16 @@
   <div class="m-10">
     <!-- title -->
     <h2 class="text-xl mb-4" v-text="TEXT.profile"></h2>
+    <ValidationObserver v-slot="vs">
     <dao-form>
       <!-- name -->
       <dao-form-item :label="TEXT.userName">
-        <ValidationProvider rules="userNameValidation" v-slot="v">
+        <ValidationProvider rules="userNameValidation" v-slot="{ errors }" userNameRight="true">
         <dao-input
         :placeholder="TEXT.userNameDefault"
         v-model="user.name"
         @input="userOnChange"/>
-        <span class="ml-8">{{v.errors[0]}}</span>
+        <span class="ml-8">{{errors[0]}}</span>
         </ValidationProvider>
       </dao-form-item>
 
@@ -46,21 +47,24 @@
 
       <!-- email -->
       <dao-form-item :label="TEXT.email">
-        <ValidationProvider rules="emailValidation" v-slot="v">
+        <ValidationProvider rules="emailValidation" v-slot="{ errors }" emailRight="true">
         <dao-input
         :placeholder="TEXT.emailDefault"
         v-model="user.email"
         @input="userOnChange"
         name="email"/>
-        <span class="ml-8">{{v.errors[0]}}</span>
+        <span class="ml-8">{{errors[0]}}</span>
         </ValidationProvider>
       </dao-form-item>
     </dao-form>
 
     <div class="mt-4 flex justify-end">
-      <dao-button class="mr-2" v-text="TEXT.buttonCancel"></dao-button>
-      <dao-button color="blue" v-text="TEXT.buttonConfirm"></dao-button>
+      <dao-button class="mr-2" v-text="TEXT.buttonCancel"/>
+      <dao-button color="blue"
+      v-text="TEXT.buttonConfirm"
+      :disabled="vs.invalid"/>
     </div>
+    </ValidationObserver>
   </div>
 </template>
 
@@ -68,6 +72,11 @@
 
 export default {
   name: 'userForm',
+
+  props: [
+    'userNameRight',
+    'emailRight',
+  ],
 
   data() {
     const TEXT = this.$i18n.t('UserFormText');
