@@ -1,10 +1,10 @@
 <template>
   <div class="m-10">
     <!-- title -->
-    <h2 class="text-xl mb-4" v-text="TEXTS.profile"></h2>
+    <h2 class="text-xl mb-4" v-text="TEXT.profile"></h2>
     <dao-form>
       <!-- name -->
-      <dao-form-item :label="TEXTS.userName">
+      <dao-form-item :label="TEXT.userName">
         <dao-input
         :placeholder="user.name"
         v-model="user.name"
@@ -12,11 +12,11 @@
       </dao-form-item>
 
       <!-- gender -->
-      <dao-form-item :label="TEXTS.gender">
+      <dao-form-item :label="TEXT.gender">
         <dao-radio-group>
           <dao-radio
             name="sex"
-            v-for="item in TEXTS.genderList"
+            v-for="item in TEXT.genderList"
             :key="item"
             :value="item"
             :label="item"
@@ -29,11 +29,11 @@
       </dao-form-item>
 
       <!-- career -->
-      <dao-form-item :label="TEXTS.career">
+      <dao-form-item :label="TEXT.career">
         <dao-select v-model="user.career" @change="userOnChange">
           <dao-option
             size="sm"
-            v-for="item in TEXTS.careerList"
+            v-for="item in TEXT.careerList"
             :key="item"
             :value="item"
             :label="item"
@@ -43,8 +43,8 @@
     </dao-form>
 
     <div class="mt-4 flex justify-end">
-      <dao-button class="mr-2" v-text="TEXTS.buttonCancel"></dao-button>
-      <dao-button color="blue" v-text="TEXTS.buttonConfirm"></dao-button>
+      <dao-button class="mr-2" v-text="TEXT.buttonCancel"></dao-button>
+      <dao-button color="blue" v-text="TEXT.buttonConfirm"></dao-button>
     </div>
   </div>
 </template>
@@ -55,16 +55,16 @@ export default {
   name: 'userForm',
 
   data() {
-    const TEXTS = this.$i18n.t('texts');
+    const TEXT = this.$i18n.t('UserFormText');
 
     return {
       // constants
-      TEXTS,
+      TEXT,
 
       user: {
-        name: TEXTS.userNameDefault,
-        gender: TEXTS.genderList[0],
-        career: TEXTS.careerList[0],
+        name: TEXT.userNameDefault,
+        gender: TEXT.genderList[0],
+        career: TEXT.careerList[0],
       },
     };
   },

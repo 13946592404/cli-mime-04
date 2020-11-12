@@ -2,8 +2,8 @@ import VueI18n from 'vue-i18n';
 import Vue from 'vue';
 import getLocale from './locale';
 
-const ENUserFormText = require('../locales/en-US/ns/UserFormText.json');
-const CHUserFormText = require('../locales/zh-CN/ns/UserFormText.json');
+const UserFormTextEN = require('../locales/en-US/ns/UserFormText.json');
+const UserFormTextCH = require('../locales/zh-CN/ns/UserFormText.json');
 
 Vue.use(VueI18n);
 
@@ -12,10 +12,10 @@ const i18n = new VueI18n({
   fallbackLocale: 'ch',
   messages: {
     en: {
-      texts: ENUserFormText,
+      UserFormText: UserFormTextEN,
     },
     ch: {
-      texts: CHUserFormText,
+      UserFormText: UserFormTextCH,
     },
   },
 });
