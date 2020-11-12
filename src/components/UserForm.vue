@@ -58,6 +58,8 @@
       </dao-form-item>
     </dao-form>
 
+    <h3 class="mt-4">上次更新时间：{{ changeTime }}</h3>
+
     <div class="mt-4 flex justify-end">
       <dao-button class="mr-2" v-text="TEXT.buttonCancel"/>
       <dao-button color="blue"
@@ -69,6 +71,7 @@
 </template>
 
 <script>
+import dayjs from 'dayjs';
 
 export default {
   name: 'userForm',
@@ -91,6 +94,8 @@ export default {
         career: TEXT.careerList[0],
         email: '',
       },
+
+      changeTime: null,
     };
   },
 
@@ -100,7 +105,8 @@ export default {
 
   methods: {
     userOnChange() {
-      this.$emit('input', this.user);
+      this.$emit('input', this.user); // two direction - bind
+      this.changeTime = dayjs().format('YYYY-MM-DD dddd HH:mm:ss');
     },
   },
 };

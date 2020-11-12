@@ -10,6 +10,7 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "dao-style-vue": "^2.0.1-rc3",
+    "dayjs": "^1.9.6",
     "js-cookie": "^2.2.1",
     "vee-validate": "^3.4.5",
     "vue": "^2.6.11",
