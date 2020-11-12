@@ -4,6 +4,7 @@ import '@/assets/tailwind.css';
 import Vue from 'vue';
 import App from './App.vue';
 import i18n from './plugins/i18n';
+import './plugins/veeValidation';
 
 // plugins
 Vue.use(daoStyle);

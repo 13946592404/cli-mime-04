@@ -11,6 +11,7 @@
     "core-js": "^3.6.5",
     "dao-style-vue": "^2.0.1-rc3",
     "js-cookie": "^2.2.1",
+    "vee-validate": "^3.4.5",
     "vue": "^2.6.11",
     "vue-i18n": "^8.22.1"
   },

@@ -5,10 +5,13 @@
     <dao-form>
       <!-- name -->
       <dao-form-item :label="TEXT.userName">
+        <ValidationProvider rules="userNameValidation" v-slot="v">
         <dao-input
         :placeholder="TEXT.userNameDefault"
         v-model="user.name"
         @input="userOnChange"/>
+        <span class="ml-8">{{v.errors[0]}}</span>
+        </ValidationProvider>
       </dao-form-item>
 
       <!-- gender -->
@@ -43,10 +46,14 @@
 
       <!-- email -->
       <dao-form-item :label="TEXT.email">
+        <ValidationProvider rules="emailValidation" v-slot="v">
         <dao-input
         :placeholder="TEXT.emailDefault"
         v-model="user.email"
-        @input="userOnChange"/>
+        @input="userOnChange"
+        name="email"/>
+        <span class="ml-8">{{v.errors[0]}}</span>
+        </ValidationProvider>
       </dao-form-item>
     </dao-form>
 
