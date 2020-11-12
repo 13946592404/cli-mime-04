@@ -6,7 +6,7 @@
       <!-- name -->
       <dao-form-item :label="TEXT.userName">
         <dao-input
-        :placeholder="user.name"
+        :placeholder="TEXT.userNameDefault"
         v-model="user.name"
         @input="userOnChange"/>
       </dao-form-item>
@@ -40,6 +40,14 @@
           />
         </dao-select>
       </dao-form-item>
+
+      <!-- email -->
+      <dao-form-item :label="TEXT.email">
+        <dao-input
+        :placeholder="TEXT.emailDefault"
+        v-model="user.email"
+        @input="userOnChange"/>
+      </dao-form-item>
     </dao-form>
 
     <div class="mt-4 flex justify-end">
@@ -62,9 +70,10 @@ export default {
       TEXT,
 
       user: {
-        name: TEXT.userNameDefault,
+        name: '',
         gender: TEXT.genderList[0],
         career: TEXT.careerList[0],
+        email: '',
       },
     };
   },

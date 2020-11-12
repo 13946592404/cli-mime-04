@@ -7,6 +7,8 @@
     "genderList": ["Female", "Male"],
     "career": "Career",
     "careerList": ["Student", "Worker", "Others..."],
+    "email": "Email",
+    "emailDefault": "xxx@xxx.xx",
     "buttonCancel": "Cancel",
     "buttonConfirm": "Confirm"
   },
@@ -18,6 +20,8 @@
     "genderList": ["女", "男"],
     "career": "职业",
     "careerList": ["学生", "工人", "其他..."],
+    "email": "邮箱",
+    "emailDefault": "xxx@xxx.xx",
     "buttonCancel": "取消",
     "buttonConfirm": "提交"
   }
