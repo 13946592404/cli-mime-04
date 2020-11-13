@@ -6,7 +6,7 @@
     <dao-form>
       <!-- name -->
       <dao-form-item :label="TEXT.userName">
-        <ValidationProvider rules="userNameValidation" v-slot="{ errors }" userNameRight="true">
+        <ValidationProvider rules="userNameValidation" v-slot="{ errors }">
         <dao-input
         :placeholder="TEXT.userNameDefault"
         v-model="user.name"
@@ -47,7 +47,7 @@
 
       <!-- email -->
       <dao-form-item :label="TEXT.email">
-        <ValidationProvider rules="emailValidation" v-slot="{ errors }" emailRight="true">
+        <ValidationProvider rules="emailValidation" v-slot="{ errors }">
         <dao-input
         :placeholder="TEXT.emailDefault"
         v-model="user.email"
@@ -78,11 +78,6 @@ import dayjs from 'dayjs';
 
 export default {
   name: 'userForm',
-
-  props: [
-    'userNameRight',
-    'emailRight',
-  ],
 
   data() {
     const TEXT = this.$i18n.t('UserFormText');
