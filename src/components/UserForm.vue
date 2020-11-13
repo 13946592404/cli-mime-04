@@ -58,16 +58,16 @@
       </dao-form-item>
     </dao-form>
 
-    <div class="mt-4">
-      <p v-text="TEXT.tipsText"/>
-      <p v-text="changeTime"/>
-    </div>
-
     <div class="mt-4 flex justify-end">
       <dao-button class="mr-2" v-text="TEXT.buttonCancel"/>
       <dao-button color="blue"
       v-text="TEXT.buttonConfirm"
       :disabled="vs.invalid"/>
+    </div>
+
+    <div class="mt-4">
+      <p v-text="TEXT.tipsText"/>
+      <p v-text="changeTime"/>
     </div>
     </ValidationObserver>
   </div>
