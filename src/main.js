@@ -1,9 +1,11 @@
+import Vue from 'vue';
 import daoStyle from 'dao-style-vue';
+import VueCodeMirror from 'vue-codemirror';
+
 import 'dao-style-vue/dist/dao-style.css';
 import '@/assets/tailwind.css';
-import VueCodeMirror from 'vue-codemirror';
 import 'codemirror/lib/codemirror.css';
-import Vue from 'vue';
+
 import App from './App.vue';
 import i18n from './plugins/i18n';
 import './plugins/veeValidation';

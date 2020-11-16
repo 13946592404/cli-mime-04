@@ -1,61 +1,60 @@
 <template>
   <div class="m-10">
     <!-- title -->
-    <h2 class="text-xl mb-4 ml-48" v-text="TEXT.profile"></h2>
-    <ValidationObserver v-slot="vs">
+    <h2 class="text-xl mb-4 ml-48">
+      {{ $i18n.t('profile') }}
+    </h2>
+    <ValidationObserver v-slot="v" tag="p">
     <div class="flex flex-row">
       <!-- form field -->
       <dao-form class="w-2/5">
         <!-- name -->
-        <dao-form-item :label="TEXT.userName">
+        <dao-form-item :label="$i18n.t('userName')">
           <ValidationProvider rules="userNameValidation" v-slot="{ errors }">
           <dao-input
-          :placeholder="TEXT.userNameDefault"
+          :placeholder="$i18n.t('userNameDefault')"
           v-model="user.name"
-          @input="userOnChange"/>
-          <span class="ml-8">{{errors[0]}}</span>
+          @input="updateUser"/>
+          <p class="ml-8">{{errors[0]}}</p>
           </ValidationProvider>
         </dao-form-item>
 
         <!-- gender -->
-        <dao-form-item :label="TEXT.gender">
+        <dao-form-item :label="$i18n.t('gender')">
           <dao-radio-group>
             <dao-radio
               name="sex"
-              v-for="item in TEXT.genderList"
+              v-for="item in $i18n.t('genderList')"
               :key="item"
               :value="item"
               :label="item"
               v-model="user.gender"
-              @change="userOnChange"
-            >
+              @change="updateUser">
               {{ item }}
             </dao-radio>
           </dao-radio-group>
         </dao-form-item>
 
         <!-- career -->
-        <dao-form-item :label="TEXT.career">
-          <dao-select v-model="user.career" @change="userOnChange">
+        <dao-form-item :label="$i18n.t('career')">
+          <dao-select v-model="user.career" @change="updateUser">
             <dao-option
               size="sm"
-              v-for="item in TEXT.careerList"
+              v-for="item in $i18n.t('careerList')"
               :key="item"
               :value="item"
-              :label="item"
-            />
+              :label="item"/>
           </dao-select>
         </dao-form-item>
 
         <!-- email -->
-        <dao-form-item :label="TEXT.email">
+        <dao-form-item :label="$i18n.t('email')">
           <ValidationProvider rules="emailValidation" v-slot="{ errors }">
           <dao-input
-          :placeholder="TEXT.emailDefault"
+          :placeholder="$i18n.t('emailDefault')"
           v-model="user.email"
-          @input="userOnChange"
-          name="email"/>
-          <span class="ml-8">{{errors[0]}}</span>
+          @input="updateUser"/>
+          <p class="ml-8">{{errors[0]}}</p>
           </ValidationProvider>
         </dao-form-item>
       </dao-form>
@@ -72,16 +71,23 @@
     <div class="ml-40">
       <!-- button -->
       <div class="mt-8">
-        <dao-button class="mr-2" v-text="TEXT.buttonCancel"/>
+        <dao-button class="mr-2">
+          {{ $i18n.t('buttonCancel') }}
+        </dao-button>
         <dao-button color="blue"
-        v-text="TEXT.buttonConfirm"
-        :disabled="vs.invalid"/>
+        :disabled="v.invalid">
+          {{ $i18n.t('buttonConfirm') }}
+        </dao-button>
       </div>
 
       <!-- text - change time -->
       <div class="mt-4">
-        <p v-text="TEXT.tipsText"/>
-        <p v-text="changeTime"/>
+        <p>
+          {{ $i18n.t('tipsText') }}
+        </p>
+        <p>
+          {{ changeTime }}
+        </p>
       </div>
     </div>
     </ValidationObserver>
@@ -101,17 +107,11 @@ export default {
   name: 'userForm',
 
   data() {
-    const TEXT = this.$i18n.t('UserFormText');
-
     return {
-      // constants
-      TEXT,
-
-      // user,
       user: {
         name: '',
-        gender: TEXT.genderList[0],
-        career: TEXT.careerList[0],
+        gender: this.$i18n.t('genderList')[0],
+        career: this.$i18n.t('careerList')[0],
         email: '',
       },
 
@@ -129,24 +129,29 @@ export default {
   },
 
   mounted() {
-    this.userOnChange(); // init
+    this.updateUser(); // init
   },
 
   methods: {
-    userOnChange() {
-      // two direction binding
-      this.$emit('input', this.user); // App.vue component
+    updateUser() {
+      // binding
+      this.$emit('input', this.user);
 
-      // set change time
-      this.changeTime = dayjs().format('YYYY-MM-DD dddd HH:mm:ss'); // update view
-      localStorage.changeTime = this.changeTime; // set time to localStorage
+      // change time
+      this.updateChangeTime();
 
-      // update codemirror
-      // deliver value between data and data (mounted or methods)
-      this.mirror.curCode = `
-  User: {
-  ${JSON.stringify(this.user).replace(/,/g, ',\n  ').replace(/[{}]/g, '')}
-  }`; // output format
+      // codemirror
+      this.updateCodeMirror();
+    },
+
+    updateChangeTime() {
+      const currentTime = dayjs().format('YYYY-MM-DD dddd HH:mm:ss');
+      this.changeTime = currentTime;
+      localStorage.changeTime = currentTime;
+    },
+
+    updateCodeMirror() {
+      this.mirror.curCode = `User: ${JSON.stringify(this.user, null, 2)}`;
     },
   },
 };
