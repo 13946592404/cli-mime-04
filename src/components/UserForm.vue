@@ -1,80 +1,157 @@
 <template>
   <div class="m-10">
-    <h2 class="text-xl mb-4">Profile</h2>
+    <!-- title -->
+    <h2 class="text-xl mb-4 ml-48">
+      {{ $i18n.t('profile') }}
+    </h2>
+    <ValidationObserver v-slot="v" tag="p">
+    <div class="flex flex-row">
+      <!-- form field -->
+      <dao-form class="w-2/5">
+        <!-- name -->
+        <dao-form-item :label="$i18n.t('userName')">
+          <ValidationProvider rules="userNameValidation" v-slot="{ errors }">
+          <dao-input
+          :placeholder="$i18n.t('userNameDefault')"
+          v-model="user.name"
+          @input="updateUser"/>
+          <p class="ml-8">{{errors[0]}}</p>
+          </ValidationProvider>
+        </dao-form-item>
 
-    <dao-form>
-      <dao-form-item label="Username">
-        <dao-input placeholder="name" v-model="user.name" @input="userOnChange"/>
-      </dao-form-item>
+        <!-- gender -->
+        <dao-form-item :label="$i18n.t('gender')">
+          <dao-radio-group>
+            <dao-radio
+              name="sex"
+              v-for="item in $i18n.t('genderList')"
+              :key="item"
+              :value="item"
+              :label="item"
+              v-model="user.gender"
+              @change="updateUser">
+              {{ item }}
+            </dao-radio>
+          </dao-radio-group>
+        </dao-form-item>
 
-      <!-- gender -->
-      <dao-form-item label="Gender">
-        <dao-radio-group>
-          <dao-radio
-            name="sex"
-            v-for="item in GENDERS"
-            :key="item"
-            :value="item"
-            :label="item"
-            v-model="user.gender"
-            @change="userOnChange"
-          >
-            {{ item }}
-          </dao-radio>
-        </dao-radio-group>
-      </dao-form-item>
+        <!-- career -->
+        <dao-form-item :label="$i18n.t('career')">
+          <dao-select v-model="user.career" @change="updateUser">
+            <dao-option
+              size="sm"
+              v-for="item in $i18n.t('careerList')"
+              :key="item"
+              :value="item"
+              :label="item"/>
+          </dao-select>
+        </dao-form-item>
 
-      <!-- career -->
-      <dao-form-item label="Career">
-        <dao-select v-model="user.career" @change="userOnChange">
-          <dao-option
-            size="sm"
-            v-for="item in CAREERS"
-            :key="item"
-            :value="item"
-            :label="item"
-          />
-        </dao-select>
-      </dao-form-item>
-    </dao-form>
+        <!-- email -->
+        <dao-form-item :label="$i18n.t('email')">
+          <ValidationProvider rules="emailValidation" v-slot="{ errors }">
+          <dao-input
+          :placeholder="$i18n.t('emailDefault')"
+          v-model="user.email"
+          @input="updateUser"/>
+          <p class="ml-8">{{errors[0]}}</p>
+          </ValidationProvider>
+        </dao-form-item>
+      </dao-form>
 
-    <div class="mt-4 flex justify-end">
-      <dao-button class="mr-2">Cancel</dao-button>
-      <dao-button color="blue">Confirm</dao-button>
+      <!-- codemirror -->
+      <codemirror
+        class="ml-8 w-1/5 h-1"
+        ref="mycode"
+        :value="mirror.curCode"
+        :options="mirror.cmOptions"/>
     </div>
+
+    <!-- form information addition -->
+    <div class="ml-40">
+      <!-- button -->
+      <div class="mt-8">
+        <dao-button class="mr-2">
+          {{ $i18n.t('buttonCancel') }}
+        </dao-button>
+        <dao-button color="blue"
+        :disabled="v.invalid">
+          {{ $i18n.t('buttonConfirm') }}
+        </dao-button>
+      </div>
+
+      <!-- text - change time -->
+      <div class="mt-4">
+        <p>
+          {{ $i18n.t('tipsText') }}
+        </p>
+        <p>
+          {{ changeTime }}
+        </p>
+      </div>
+    </div>
+    </ValidationObserver>
   </div>
 </template>
 
 <script>
+import dayjs from 'dayjs';
+
+import { codeMirror } from 'vue-codemirror';
+import 'codemirror/theme/ambiance.css';
+import 'codemirror/mode/javascript/javascript';
+
+console.log(codeMirror);
+
 export default {
   name: 'userForm',
 
-  // props: [
-  //   'value',
-  // ],
-
   data() {
-    const GENDERS = ['Female', 'Male'];
-    const CAREERS = ['Student', 'Worker', 'Others...'];
     return {
-      // constants
-      GENDERS,
-      CAREERS,
       user: {
-        name: 'name',
-        gender: GENDERS[0],
-        career: CAREERS[0],
+        name: '',
+        gender: this.$i18n.t('genderList')[0],
+        career: this.$i18n.t('careerList')[0],
+        email: '',
+      },
+
+      changeTime: null,
+
+      mirror: {
+        curCode: '',
+        cmOptions: {
+          mode: 'text/javascript',
+          theme: 'ambiance',
+          readOnly: true,
+        },
       },
     };
   },
 
-  created() {
-    this.userOnChange();
+  mounted() {
+    this.updateUser(); // init
   },
 
   methods: {
-    userOnChange() {
+    updateUser() {
+      // binding
       this.$emit('input', this.user);
+
+      // change time
+      this.updateChangeTime();
+
+      // codemirror
+      this.updateCodeMirror();
+    },
+
+    updateChangeTime() {
+      const currentTime = dayjs().format('YYYY-MM-DD dddd HH:mm:ss');
+      this.changeTime = currentTime;
+      localStorage.changeTime = currentTime;
+    },
+
+    updateCodeMirror() {
+      this.mirror.curCode = `User: ${JSON.stringify(this.user, null, 2)}`;
     },
   },
 };

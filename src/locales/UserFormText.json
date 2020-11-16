@@ -1,0 +1,34 @@
+{
+  "en": {
+    "profile": "Profile",
+    "userName": "Username",
+    "userNameDefault": "Your name",
+    "userNameError": "Name must be in Chinese!",
+    "email": "Email",
+    "emailDefault": "xxx@xxx.xx",
+    "emailError": "Incorrect email format!",
+    "gender": "Gender",
+    "genderList": ["Female", "Male"],
+    "career": "Career",
+    "careerList": ["Student", "Worker", "Others..."],
+    "buttonCancel": "Cancel",
+    "buttonConfirm": "Confirm",
+    "tipsText": "Last modified time:"
+  },
+  "ch": {
+    "profile": "简介",
+    "userName": "用户名",
+    "userNameDefault": "你的姓名",
+    "userNameError": "姓名必须使用中文!",
+    "email": "邮箱",
+    "emailDefault": "xxx@xxx.xx",
+    "emailError": "错误的邮箱格式!",
+    "gender": "性别",
+    "genderList": ["女", "男"],
+    "career": "职业",
+    "careerList": ["学生", "工人", "其他..."],
+    "buttonCancel": "取消",
+    "buttonConfirm": "提交",
+    "tipsText": "上次修改时间:"
+  }
+}

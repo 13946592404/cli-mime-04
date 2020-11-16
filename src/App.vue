@@ -11,6 +11,7 @@ const makeUser = () => ({
   name: '',
   gender: '',
   career: '',
+  email: '',
 });
 
 export default {
