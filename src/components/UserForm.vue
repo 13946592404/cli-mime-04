@@ -129,13 +129,21 @@ export default {
   },
 
   mounted() {
-    this.updateUser(); // init
+    this.initVuex();
+    this.updateUser();
   },
 
   methods: {
+    initVuex() {
+      this.$store.state.user = this.user;
+    },
+
     updateUser() {
       // binding
       this.$emit('input', this.user);
+
+      // vuex
+      this.updateVuex();
 
       // change time
       this.updateChangeTime();
@@ -144,9 +152,14 @@ export default {
       this.updateCodeMirror();
     },
 
+    updateVuex() {
+      this.$store.commit('updateUser', this.user);
+    },
+
     updateChangeTime() {
       const currentTime = dayjs().format('YYYY-MM-DD dddd HH:mm:ss');
       this.changeTime = currentTime;
+      // localStorage
       localStorage.changeTime = currentTime;
     },
 
