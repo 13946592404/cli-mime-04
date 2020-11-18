@@ -1,15 +1,15 @@
 FROM nginx:1.15
 
-WORKDIR /usr/src/app
+# WORKDIR /usr/src/app
 
-COPY package.json .
+# COPY package.json .
 
-RUN npm run build
+RUN yarn build
 
-EXPOSE 8888
+# EXPOSE 8888
 
 COPY dist/  /usr/share/nginx/html/
 
-CMD [ "npm", "start" ]
+# CMD [ "npm", "start" ]
 
-COPY . .
+# COPY . .
