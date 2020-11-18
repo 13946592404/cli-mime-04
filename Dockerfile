@@ -4,7 +4,7 @@ FROM nginx:1.15
 
 # COPY package.json .
 
-RUN yarn build
+## RUN npm run build
 
 # EXPOSE 8888
 
