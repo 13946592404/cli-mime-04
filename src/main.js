@@ -11,6 +11,7 @@ import App from './App.vue';
 import i18n from './plugins/i18n';
 import './plugins/veeValidation';
 import store from './store';
+import router from './routers/plugin';
 
 // plugins
 Vue.use(daoStyle);
@@ -22,4 +23,5 @@ new Vue({
   render: (h) => h(App),
   i18n,
   store,
+  router,
 }).$mount('#app');

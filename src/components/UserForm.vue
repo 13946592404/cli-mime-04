@@ -12,9 +12,10 @@
         <dao-form-item :label="$i18n.t('userName')">
           <ValidationProvider rules="userNameValidation" v-slot="{ errors }">
           <dao-input
-          :placeholder="$i18n.t('userNameDefault')"
-          v-model="user.name"
-          @input="updateUser"/>
+            :placeholder="$i18n.t('userNameDefault')"
+            v-model="user.name"
+            @input="updateUser"
+          />
           <p class="ml-8">{{errors[0]}}</p>
           </ValidationProvider>
         </dao-form-item>
@@ -43,7 +44,8 @@
               v-for="item in $i18n.t('careerList')"
               :key="item"
               :value="item"
-              :label="item"/>
+              :label="item"
+            />
           </dao-select>
         </dao-form-item>
 
@@ -51,9 +53,10 @@
         <dao-form-item :label="$i18n.t('email')">
           <ValidationProvider rules="emailValidation" v-slot="{ errors }">
           <dao-input
-          :placeholder="$i18n.t('emailDefault')"
-          v-model="user.email"
-          @input="updateUser"/>
+            :placeholder="$i18n.t('emailDefault')"
+            v-model="user.email"
+            @input="updateUser"
+          />
           <p class="ml-8">{{errors[0]}}</p>
           </ValidationProvider>
         </dao-form-item>
@@ -64,7 +67,8 @@
         class="ml-8 w-1/5 h-1"
         ref="mycode"
         :value="mirror.curCode"
-        :options="mirror.cmOptions"/>
+        :options="mirror.cmOptions"
+      />
     </div>
 
     <!-- form information addition -->
@@ -101,10 +105,10 @@ import { codeMirror } from 'vue-codemirror';
 import 'codemirror/theme/ambiance.css';
 import 'codemirror/mode/javascript/javascript';
 
-console.log(codeMirror);
+console.log(`codeMirror: ${codeMirror}`);
 
 export default {
-  name: 'userForm',
+  name: 'UserForm',
 
   data() {
     return {
