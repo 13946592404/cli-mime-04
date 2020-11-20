@@ -6,12 +6,7 @@
 import Cookie from 'js-cookie';
 import userForm from '../../components/UserForm.vue';
 
-const makeUser = () => ({
-  name: '',
-  gender: '',
-  career: '',
-  email: '',
-});
+const makeUser = () => ({});
 
 export default {
   components: {
