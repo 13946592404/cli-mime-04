@@ -1,11 +1,8 @@
-import Cookie from 'js-cookie';
 import Home from '@/views/home.vue';
 import Profile from '@/views/profile/Profile.vue';
 import About from '@/views/common/About.vue';
 import NotFound from '@/views/common/NotFound.vue';
-
-// cookies have field: auth
-const getAuth = () => Cookie.get('auth') !== undefined;
+import getCookie from '../plugins/getCookie';
 
 export default [
   {
@@ -16,7 +13,7 @@ export default [
       public: true,
     },
     redirect: {
-      name: getAuth() ? 'profile' : 'about',
+      name: getCookie.hasAuth() ? 'profile' : 'about',
     },
   },
   {

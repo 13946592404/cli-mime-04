@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Cookie from 'js-cookie';
+import getCookie from '../../plugins/getCookie';
 import userForm from '../../components/UserForm.vue';
 
 const makeUser = () => ({});
@@ -23,8 +23,8 @@ export default {
 
   created() {
     // cookies have field: auth
-    if (!Cookie.get('auth')) {
-      this.$router.push('about');
+    if (!getCookie.hasAuth()) {
+      this.$router.push('404');
     }
   },
 };
