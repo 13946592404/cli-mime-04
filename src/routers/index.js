@@ -1,5 +1,6 @@
 import Home from '@/views/home.vue';
 import Profile from '@/views/profile/Profile.vue';
+import Soet from '@/views/graph/Soet.vue';
 import About from '@/views/common/About.vue';
 import NotFound from '@/views/common/NotFound.vue';
 import getCookie from '../plugins/getCookie';
@@ -13,13 +14,22 @@ export default [
       public: true,
     },
     redirect: {
-      name: getCookie.hasAuth() ? 'profile' : 'about',
+      // name: getCookie.hasAuth() ? 'profile' : 'about',
+      name: getCookie.hasAuth() ? 'soet' : 'about',
     },
   },
   {
     path: '/profile',
     name: 'profile',
     component: Profile,
+    meta: {
+      public: true,
+    },
+  },
+  {
+    path: '/soet',
+    name: 'soet',
+    component: Soet,
     meta: {
       public: true,
     },

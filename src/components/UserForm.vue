@@ -108,8 +108,6 @@ import 'codemirror/mode/javascript/javascript';
 console.log(`codeMirror: ${codeMirror}`);
 
 export default {
-  name: 'UserForm',
-
   data() {
     return {
       user: {
