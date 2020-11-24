@@ -30,12 +30,12 @@
 </template>
 
 <script>
-import soetResponse from '../data/soet-response.json';
+import soetResponse from '../plugins/soetResponse';
 
 export default {
   data() {
     return {
-      res: soetResponse.data.result,
+      res: soetResponse.res,
     };
   },
 };
