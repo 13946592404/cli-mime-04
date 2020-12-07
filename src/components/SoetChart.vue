@@ -41,7 +41,7 @@ export default {
 
 <style>
 .__echarts{
-  width: 1200px;
+  width: 600px;
   height: 400px;
 }
 .echarts{

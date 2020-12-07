@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import soetResponse from '../data/soet-response.json';
 
 const res = soetResponse.data.result;
@@ -21,8 +22,26 @@ const getValueSeries = (responseData) => {
   return ans;
 };
 
+console.log(res);
+
+const getArrays = (responseData) => {
+  const ans = [];
+  responseData.forEach((val, index) => {
+    val.values.forEach((dataval) => {
+      const obj = {
+        symbol: index,
+        time: dayjs.unix(dataval[0]).format('HH:mm'),
+        value: Number.parseInt(dataval[1], 10),
+      };
+      ans.push(obj);
+    });
+  });
+  return ans;
+};
+
 export default {
   res,
   timeSeries: getTimeSeries(res),
   valueSeries: getValueSeries(res),
+  arrays: getArrays(res),
 };
