@@ -1,6 +1,17 @@
 <template>
-  <div>
+  <div class="flex flex-col">
     <div id="vis" />
+    <div class="m-8">
+      legend的位置：
+      <dao-select
+        v-model="legendLocation">
+        <dao-option
+          v-for="item in legendLocationItems"
+          :key="item.value"
+          :value="item.text"
+          :label="item.text" />
+      </dao-select>
+    </div>
   </div>
 </template>
 
@@ -61,7 +72,7 @@ const spec = {
             ],
           },
           legend: {
-            orient: 'bottom', // legend position
+            orient: 'bottom', // legend location (default)
           },
         },
         opacity: {
@@ -126,19 +137,40 @@ const spec = {
 
 export default {
   data() {
+    const legendLocationItems = [
+      { value: 0, text: 'bottom' },
+      { value: 1, text: 'top' },
+      { value: 2, text: 'left' },
+      { value: 3, text: 'right' },
+      { value: 4, text: 'top-left' },
+      { value: 5, text: 'top-right' },
+      { value: 6, text: 'bottom-left' },
+      { value: 7, text: 'bottom-right' },
+    ];
+
     return {
       spec,
+      legendLocationItems,
+      legendLocation: legendLocationItems[0].text,
     };
   },
 
   methods: {
-    onVision(dom) {
-      embed(dom, this.spec);
+    onVision() {
+      embed('#vis', this.spec);
+    },
+    modifyLegendLocation() {
+      this.spec.layer[0].encoding.color.legend.orient = this.legendLocation;
     },
   },
 
   beforeMount() {
-    this.onVision('#vis');
+    this.onVision();
+  },
+
+  updated() {
+    this.modifyLegendLocation();
+    this.onVision();
   },
 };
 </script>
