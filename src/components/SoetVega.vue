@@ -24,10 +24,37 @@ const spec = {
         labelSeparation: 70, // dynamic distance
       },
     },
+    color: {
+      field: 'symbol',
+      type: 'nominal',
+      scale: {
+        range: [
+          // DIY color
+          // can also use { field: 'xxx' }, corresponding origin data { xxx: 'Black'}
+          'Black',
+          'Blue',
+          'BlueViolet',
+          'Brown',
+          'Chocolate',
+          'Crimson',
+          'DarkGreen',
+          'DarkSlateBlue',
+          'Gold',
+          'HotPink',
+          'LightSeaGreen',
+          'Olive',
+          'PaleVioletRed',
+        ],
+      },
+      legend: {
+        orient: 'bottom', // legend position
+      },
+    },
   },
 
   layer: [
-    { // layer: y axis with selection 'selected'
+    {
+      // layer: y axis with opacity, selection
       mark: {
         type: 'line',
       },
@@ -35,32 +62,6 @@ const spec = {
         y: {
           field: 'value',
           type: 'quantitative',
-        },
-        color: {
-          field: 'symbol',
-          type: 'nominal',
-          scale: {
-            range: [
-              // DIY color
-              // can also use { field: 'xxx' }, corresponding origin data { xxx: 'Black'}
-              'Black',
-              'Blue',
-              'BlueViolet',
-              'Brown',
-              'Chocolate',
-              'Crimson',
-              'DarkGreen',
-              'DarkSlateBlue',
-              'Gold',
-              'HotPink',
-              'LightSeaGreen',
-              'Olive',
-              'PaleVioletRed',
-            ],
-          },
-          legend: {
-            orient: 'bottom', // legend position
-          },
         },
         opacity: {
           condition: {
