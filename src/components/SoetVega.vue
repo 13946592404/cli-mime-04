@@ -1,5 +1,7 @@
 <template>
-  <div id="vis" />
+  <div>
+    <div id="vis" />
+  </div>
 </template>
 
 <script>
@@ -12,15 +14,16 @@ const spec = {
   },
   mark: {
     type: 'line',
-    // point: true,
   },
   encoding: {
+    width: 300,
+    height: 200,
     x: {
       field: 'time',
       type: 'nominal',
       axis: {
         labelOverlap: 'greedy',
-        labelSeparation: 70, // 10 mins - dynamic
+        labelSeparation: 70, // dynamic
       },
     },
     y: {
@@ -30,10 +33,25 @@ const spec = {
     color: {
       field: 'symbol',
       type: 'nominal',
+      scale: {
+        range: [
+          'blue',
+          'green',
+          'red',
+          'yellow',
+          'black',
+          'violet',
+          'orange',
+          'purple',
+          'black',
+          'pink',
+          'sliver',
+          'golden',
+          'bronze',
+        ],
+      },
     },
   },
-  width: 500,
-  height: 200,
 };
 
 export default {

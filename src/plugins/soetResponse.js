@@ -22,8 +22,6 @@ const getValueSeries = (responseData) => {
   return ans;
 };
 
-console.log(res);
-
 const getArrays = (responseData) => {
   const ans = [];
   responseData.forEach((val, index) => {
