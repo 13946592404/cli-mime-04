@@ -12,11 +12,9 @@ const spec = {
   data: {
     values: soetResponse.arrays,
   },
-  width: 780,
-  height: 230,
-  mark: {
-    type: 'line',
-  },
+  width: 600,
+  height: 200,
+
   encoding: {
     x: {
       field: 'time',
@@ -26,52 +24,62 @@ const spec = {
         labelSeparation: 70, // dynamic distance
       },
     },
-    y: {
-      field: 'value',
-      type: 'quantitative',
-    },
-    color: {
-      field: 'symbol',
-      type: 'nominal',
-      scale: {
-        range: [
-          // DIY color
-          // can also use { field: 'xxx' }, corresponding origin data { xxx: 'Black'}
-          'Black',
-          'Blue',
-          'BlueViolet',
-          'Brown',
-          'Chocolate',
-          'Crimson',
-          'DarkGreen',
-          'DarkSlateBlue',
-          'Gold',
-          'HotPink',
-          'LightSeaGreen',
-          'Olive',
-          'PaleVioletRed',
-        ],
-      },
-      legend: {
-        orient: 'bottom', // legend position
-      },
-    },
-    opacity: {
-      condition: {
-        selection: 'selected',
-        value: 1, // show
-      },
-      value: 0, // hidden
-    },
   },
-  selection: {
-    selected: {
-      // selected - show
-      type: 'single',
-      fields: ['symbol'],
-      bind: 'legend',
+
+  layer: [
+    { // layer: y axis with selection 'selected'
+      mark: {
+        type: 'line',
+      },
+      encoding: {
+        y: {
+          field: 'value',
+          type: 'quantitative',
+        },
+        color: {
+          field: 'symbol',
+          type: 'nominal',
+          scale: {
+            range: [
+              // DIY color
+              // can also use { field: 'xxx' }, corresponding origin data { xxx: 'Black'}
+              'Black',
+              'Blue',
+              'BlueViolet',
+              'Brown',
+              'Chocolate',
+              'Crimson',
+              'DarkGreen',
+              'DarkSlateBlue',
+              'Gold',
+              'HotPink',
+              'LightSeaGreen',
+              'Olive',
+              'PaleVioletRed',
+            ],
+          },
+          legend: {
+            orient: 'bottom', // legend position
+          },
+        },
+        opacity: {
+          condition: {
+            selection: 'selected',
+            value: 1, // show
+          },
+          value: 0, // hidden
+        },
+      },
+      selection: {
+        selected: {
+          // selected - show
+          type: 'single',
+          fields: ['symbol'],
+          bind: 'legend',
+        },
+      },
     },
-  },
+  ],
 };
 
 export default {
