@@ -89,9 +89,17 @@ const spec = {
           value: 'value',
           groupby: ['time'],
         },
+        // {
+        //   filter: {
+        //     selection: 'selected',
+        //   },
+        // },
       ],
       mark: {
         type: 'rule',
+        tooltip: {
+          content: 'data',
+        },
       },
       encoding: {
         opacity: {
@@ -101,22 +109,6 @@ const spec = {
           },
           value: 0,
         },
-        tooltip: [
-          { field: 'time', type: 'nominal' },
-          { field: '0', type: 'quantitative' },
-          { field: '1', type: 'quantitative' },
-          { field: '2', type: 'quantitative' },
-          { field: '3', type: 'quantitative' },
-          { field: '4', type: 'quantitative' },
-          { field: '5', type: 'quantitative' },
-          { field: '6', type: 'quantitative' },
-          { field: '7', type: 'quantitative' },
-          { field: '8', type: 'quantitative' },
-          { field: '9', type: 'quantitative' },
-          { field: '10', type: 'quantitative' },
-          { field: '11', type: 'quantitative' },
-          { field: '12', type: 'quantitative' },
-        ],
       },
       selection: {
         hover: {
