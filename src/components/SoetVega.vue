@@ -12,18 +12,18 @@ const spec = {
   data: {
     values: soetResponse.arrays,
   },
+  width: 780,
+  height: 230,
   mark: {
     type: 'line',
   },
   encoding: {
-    width: 300,
-    height: 200,
     x: {
       field: 'time',
       type: 'nominal',
       axis: {
         labelOverlap: 'greedy',
-        labelSeparation: 70, // dynamic
+        labelSeparation: 70, // dynamic distance
       },
     },
     y: {
@@ -35,21 +35,41 @@ const spec = {
       type: 'nominal',
       scale: {
         range: [
-          'blue',
-          'green',
-          'red',
-          'yellow',
-          'black',
-          'violet',
-          'orange',
-          'purple',
-          'black',
-          'pink',
-          'sliver',
-          'golden',
-          'bronze',
+          // DIY color
+          // can also use { field: 'xxx' }, corresponding origin data { xxx: 'Black'}
+          'Black',
+          'Blue',
+          'BlueViolet',
+          'Brown',
+          'Chocolate',
+          'Crimson',
+          'DarkGreen',
+          'DarkSlateBlue',
+          'Gold',
+          'HotPink',
+          'LightSeaGreen',
+          'Olive',
+          'PaleVioletRed',
         ],
       },
+      legend: {
+        orient: 'bottom', // legend position
+      },
+    },
+    opacity: {
+      condition: {
+        selection: 'selected',
+        value: 1, // show
+      },
+      value: 0, // hidden
+    },
+  },
+  selection: {
+    selected: {
+      // selected - show
+      type: 'single',
+      fields: ['symbol'],
+      bind: 'legend',
     },
   },
 };
