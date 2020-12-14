@@ -37,9 +37,51 @@ const getArrays = (responseData) => {
   return ans;
 };
 
+// 自定义颜色范围
+const colorRange = [
+  'Black',
+  'Blue',
+  'BlueViolet',
+  'Brown',
+  'Chocolate',
+  'Crimson',
+  'DarkGreen',
+  'DarkSlateBlue',
+  'Gold',
+  'HotPink',
+  'LightSeaGreen',
+  'Olive',
+  'PaleVioletRed',
+];
+
+// 获取res的统计版数据，获得每一项的max min avg
+const getArraysStatistic = (responseData) => {
+  const ans = [];
+  responseData.forEach((val, index) => {
+    ans.push({
+      color: colorRange[index],
+      symbol: index,
+      max: -Number.MAX_VALUE,
+      min: Number.MAX_VALUE,
+      avg: 0,
+    });
+    let sum = 0;
+    val.values.forEach((dataval, i) => {
+      const value = Number.parseInt(dataval[1], 10) + i; // 把数据改成变化的
+      ans[index].max = Math.max(ans[index].max, value);
+      ans[index].min = Math.min(ans[index].min, value);
+      sum += value;
+    });
+    ans[index].avg = sum / val.values.length;
+  });
+  return ans;
+};
+
 export default {
   res,
   timeSeries: getTimeSeries(res),
   valueSeries: getValueSeries(res),
   arrays: getArrays(res),
+  arraysStatistic: getArraysStatistic(res),
+  colorRange,
 };
