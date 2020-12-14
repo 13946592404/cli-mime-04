@@ -25,11 +25,11 @@ const getValueSeries = (responseData) => {
 const getArrays = (responseData) => {
   const ans = [];
   responseData.forEach((val, index) => {
-    val.values.forEach((dataval) => {
+    val.values.forEach((dataval, i) => {
       const obj = {
         symbol: index,
         time: dayjs.unix(dataval[0]).format('HH:mm'),
-        value: Number.parseInt(dataval[1], 10),
+        value: Number.parseInt(dataval[1], 10) + i, // 把数据改成变化的
       };
       ans.push(obj);
     });
