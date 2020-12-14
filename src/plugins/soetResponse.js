@@ -3,12 +3,14 @@ import soetResponse from '../data/soet-response.json';
 
 const res = soetResponse.data.result;
 
+// Echarts使用：时间序列
 const getTimeSeries = (responseData) => {
   const ans = [];
   responseData[0].values.forEach((val) => { ans.push(val[0]); });
   return ans;
 };
 
+// Echarts使用：值序列
 const getValueSeries = (responseData) => {
   const ans = [];
   responseData.forEach((val) => {
@@ -22,6 +24,7 @@ const getValueSeries = (responseData) => {
   return ans;
 };
 
+// vega-lite使用：获取res的(legend time value)数组
 const getArrays = (responseData) => {
   const ans = [];
   responseData.forEach((val, index) => {
@@ -37,24 +40,7 @@ const getArrays = (responseData) => {
   return ans;
 };
 
-// 自定义颜色范围
-const colorRange = [
-  'Black',
-  'Blue',
-  'BlueViolet',
-  'Brown',
-  'Chocolate',
-  'Crimson',
-  'DarkGreen',
-  'DarkSlateBlue',
-  'Gold',
-  'HotPink',
-  'LightSeaGreen',
-  'Olive',
-  'PaleVioletRed',
-];
-
-// 获取res的统计版数据，获得每一项的max min avg
+// vega-lite使用：获取res的(color symbol max min avg)统计版数据
 const getArraysStatistic = (responseData) => {
   const ans = [];
   responseData.forEach((val, index) => {
@@ -76,6 +62,23 @@ const getArraysStatistic = (responseData) => {
   });
   return ans;
 };
+
+// vega-lite使用：自定义颜色范围
+const colorRange = [
+  'Black',
+  'Blue',
+  'BlueViolet',
+  'Brown',
+  'Chocolate',
+  'Crimson',
+  'DarkGreen',
+  'DarkSlateBlue',
+  'Gold',
+  'HotPink',
+  'LightSeaGreen',
+  'Olive',
+  'PaleVioletRed',
+];
 
 export default {
   res,
