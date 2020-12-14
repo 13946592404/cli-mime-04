@@ -3,20 +3,23 @@
     <div id="vis" />
     <div class="m-8">
       legend的位置：
-      <dao-select
-        v-model="legendLocation">
+      <dao-select v-model="legendLocation">
         <dao-option
           v-for="item in legendLocationItems"
           :key="item.value"
           :value="item.text"
-          :label="item.text" />
+          :label="item.text"
+        />
       </dao-select>
+      <div id="view">
+        <div id="viewBind"></div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import embed from 'vega-embed';
+import embed, { vega } from 'vega-embed';
 import soetResponse from '../plugins/soetResponse';
 
 const spec = {
@@ -137,6 +140,8 @@ const spec = {
 
 export default {
   data() {
+    let view;
+
     const legendLocationItems = [
       { value: 0, text: 'bottom' },
       { value: 1, text: 'top' },
@@ -149,6 +154,7 @@ export default {
     ];
 
     return {
+      view,
       spec,
       legendLocationItems,
       legendLocation: legendLocationItems[0].text,
@@ -166,6 +172,17 @@ export default {
 
   beforeMount() {
     this.onVision();
+  },
+
+  mounted() {
+    this.view = new vega.View(vega.parse(spec), {
+      logLevel: vega.Warn, // view logging level
+      renderer: 'svg', // render type (defaults to 'canvas')
+      container: '#view', // parent DOM element
+      bind: '#viewBind',
+      hover: true, // enable hover event processing
+    });
+    this.view.runAsync(); // evaluate and render the view
   },
 
   updated() {
