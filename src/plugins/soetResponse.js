@@ -24,6 +24,23 @@ const getValueSeries = (responseData) => {
   return ans;
 };
 
+// vega-lite使用：自定义颜色范围
+const colorRange = [
+  'Black',
+  'Blue',
+  'BlueViolet',
+  'Brown',
+  'Chocolate',
+  'Crimson',
+  'DarkGreen',
+  'DarkSlateBlue',
+  'Gold',
+  'HotPink',
+  'LightSeaGreen',
+  'Olive',
+  'PaleVioletRed',
+];
+
 // vega-lite使用：获取res的(legend time value)数组
 const getArrays = (responseData) => {
   const ans = [];
@@ -62,23 +79,6 @@ const getArraysStatistic = (responseData) => {
   });
   return ans;
 };
-
-// vega-lite使用：自定义颜色范围
-const colorRange = [
-  'Black',
-  'Blue',
-  'BlueViolet',
-  'Brown',
-  'Chocolate',
-  'Crimson',
-  'DarkGreen',
-  'DarkSlateBlue',
-  'Gold',
-  'HotPink',
-  'LightSeaGreen',
-  'Olive',
-  'PaleVioletRed',
-];
 
 export default {
   res,
